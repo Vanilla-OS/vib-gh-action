@@ -9,6 +9,13 @@ if [ -z "$PLUGINS_ARG" ]; then
     chmod +x vib
 else
     echo "Plugins specified, building Vib from source along with plugins"
+    echo "Setting up Go environment"
+    wget https://dl.google.com/go/go1.21.5.linux-amd64.tar.gz -O go.tar.gz
+    tar -C $HOME -xzf go.tar.gz && rm go.tar.gz
+    mv $HOME/go $HOME/_go
+    export GOROOT=$HOME/_go
+    export GO_BIN=$GOROOT/bin
+
     mkdir plugins
     mkdir vib_work
 
@@ -17,8 +24,8 @@ else
         git clone "$PLUGIN" "vib_work/$(basename "$PLUGIN")"
 
         cd "vib_work/$(basename "$PLUGIN")"
-        go get github.com/vanilla-os/vib/api
-        go build -trimpath -buildmode=plugin
+        $GO_BIN get github.com/vanilla-os/vib/api
+        $GO_BIN build -trimpath -buildmode=plugin
         mv *.so ../../plugins
 
         cd -
@@ -28,8 +35,8 @@ else
     tar -xzvf "$VIB_VERSION.tar.gz"
 
     cd "Vib-$VIB_VERSION"
-    go get github.com/vanilla-os/vib/api
-    go build -trimpath -o vib
+    $GO_BIN get github.com/vanilla-os/vib/api
+    $GO_BIN build -trimpath -o vib
     chmod +x vib
     mv vib ../
 
