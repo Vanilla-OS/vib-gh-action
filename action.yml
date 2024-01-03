@@ -1,5 +1,9 @@
 name: 'Vib Action'
 description: 'Build Vib Image'
+author: 'Vanilla OS Team'
+branding:
+  icon: 'arrow-up'
+  color: 'yellow'
 runs:
   using: 'composite'
   steps:
