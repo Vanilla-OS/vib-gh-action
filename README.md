@@ -7,6 +7,9 @@ See [action.yml](action.yml)
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - name: Vib Action
-    uses: vanilla-os/vib-gh-action@v0.3.1
+  - uses: vanilla-os/vib-gh-action@v0.3.1-2
+    with:
+      recipe: 'myRecipe.yml'
 ```
+
+default `recipe` value is `recipe.yml`.
