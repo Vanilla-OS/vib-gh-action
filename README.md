@@ -10,6 +10,12 @@ steps:
   - uses: vanilla-os/vib-gh-action@v0.3.2
     with:
       recipe: 'myRecipe.yml'
+      plugins: org/repo:tag,org/repo:tag
 ```
 
-default `recipe` value is `recipe.yml`.
+default `recipe` value is `recipe.yml`, default `plugins` value is empty.
+
+## References
+- [Vib](https://github.com/Vanilla-OS/Vib)
+- [Vib plugins](https://github.com/Vanilla-OS/vib-plugin)
+- [Vib image example](https://github.com/Vanilla-OS/desktop-image)
