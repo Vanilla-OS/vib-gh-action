@@ -21,7 +21,7 @@ runs:
 
     - name: Setup Vib
       shell: bash
-      run: sh setup.sh
+      run: sh ${{ github.action_path }}/setup.sh
 
     - name: Run Vib
       shell: bash
