@@ -21,11 +21,8 @@ runs:
 
     - name: Setup Vib
       shell: bash
-      run: |
-        wget https://github.com/Vanilla-OS/Vib/releases/download/v0.3.1/vib
-        chmod +x vib
+      run: sh setup.sh
 
     - name: Run Vib
       shell: bash
-      run: |
-        ./vib build ${{ inputs.recipe }}
+      run: ./vib build ${{ inputs.recipe }}
