@@ -4,6 +4,11 @@ author: 'Vanilla OS Team'
 branding:
   icon: 'arrow-up'
   color: 'yellow'
+inputs:
+  recipe:
+    description: 'Path to recipe.yml'
+    required: true
+    default: 'recipe.yml'
 runs:
   using: 'composite'
   steps:
@@ -19,4 +24,4 @@ runs:
     - name: Run Vib
       shell: bash
       run: |
-        ./vib build recipe.yml
+        ./vib build ${{ inputs.recipe }}
