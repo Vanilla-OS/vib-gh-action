@@ -11,10 +11,12 @@ runs:
       uses: actions/checkout@v4
 
     - name: Setup Vib
+      shell: bash
       run: |
         wget https://github.com/Vanilla-OS/Vib/releases/download/v0.3.1/vib
         chmod +x vib
 
     - name: Run Vib
+      shell: bash
       run: |
         ./vib build recipe.yml
