@@ -11,6 +11,9 @@ else
     echo "Plugins specified, downloading plugin assets"
 
     mkdir plugins
+    
+    pwd
+    ls -la plugins
 
     IFS=',' read -ra PLUGIN_LIST <<< "$(echo "$PLUGINS_ARG")"
     for PLUGIN in "${PLUGIN_LIST[@]}"; do
