@@ -11,9 +11,6 @@ else
     echo "Plugins specified, downloading plugin assets"
 
     mkdir plugins
-    
-    pwd
-    ls -la plugins
 
     IFS=',' read -ra PLUGIN_LIST <<< "$(echo "$PLUGINS_ARG")"
     for PLUGIN in "${PLUGIN_LIST[@]}"; do
@@ -29,6 +26,12 @@ else
             wget -P plugins/ "$ASSET_URL"
         done
     done
+
+    echo "pwd: $(pwd)"
+    echo "pwd files list:"
+    ls -l
+    echo "plugins files list:"
+    ls -la plugins
 
     wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
     chmod +x vib
