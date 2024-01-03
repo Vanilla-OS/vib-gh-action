@@ -19,7 +19,7 @@ else
     mkdir plugins
     mkdir vib_work
 
-    IFS=',' read -ra PLUGIN_LIST <<< "$PLUGINS_ARG"
+    IFS=',' read -ra PLUGIN_LIST <<< "$(echo "$PLUGINS_ARG")"
     for PLUGIN in "${PLUGIN_LIST[@]}"; do
         git clone "$PLUGIN" "vib_work/$(basename "$PLUGIN")"
 
@@ -41,4 +41,9 @@ else
     mv vib ../
 
     cd -
+    rm -rf "Vib-$VIB_VERSION"
+    rm -rf vib_work
+    unset GO_BIN
+    unset GOROOT
+    rm -rf $HOME/_go
 fi
