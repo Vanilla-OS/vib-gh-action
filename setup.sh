@@ -1,11 +1,11 @@
 #!/bin/bash
 
-VIB_VERSION="v0.3.1"
+VIB_VERSION="0.3.1"
 PLUGINS_ARG="${1:-}"
 
 if [ -z "$PLUGINS_ARG" ]; then
     echo "No plugins specified, using static Vib binary"
-    wget "https://github.com/Vanilla-OS/Vib/releases/download/$VIB_VERSION/vib"
+    wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
     chmod +x vib
 else
     echo "Plugins specified, building Vib from source along with plugins"
@@ -14,7 +14,7 @@ else
     tar -C $HOME -xzf go.tar.gz && rm go.tar.gz
     mv $HOME/go $HOME/_go
     export GOROOT=$HOME/_go
-    export GO_BIN=$GOROOT/bin
+    export GO_BIN=$GOROOT/bin/go
 
     mkdir plugins
     mkdir vib_work
@@ -31,8 +31,8 @@ else
         cd -
     done
 
-    wget "https://github.com/Vanilla-OS/Vib/archive/$VIB_VERSION.tar.gz"
-    tar -xzvf "$VIB_VERSION.tar.gz"
+    wget "https://github.com/Vanilla-OS/Vib/archive/v$VIB_VERSION.tar.gz"
+    tar -xzvf "v$VIB_VERSION.tar.gz"
 
     cd "Vib-$VIB_VERSION"
     $GO_BIN get github.com/vanilla-os/vib/api
