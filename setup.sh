@@ -8,7 +8,7 @@ if [ -z "$PLUGINS_ARG" ]; then
     wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
     chmod +x vib
 else
-    echo "Plugins specified, downloading plugin assets"
+    echo "Plugins specified, downloading plugin assets..."
 
     mkdir plugins
 
@@ -17,7 +17,7 @@ else
         REPO=$(echo "$PLUGIN" | awk -F':' '{print $1}')
         TAG=$(echo "$PLUGIN" | awk -F':' '{print $2}')
         
-        echo "Downloading assets for $REPO"
+        echo "Downloading assets for $REPO..."
         
         ASSETS_URL="https://api.github.com/repos/$REPO/releases/tags/$TAG"
         ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
@@ -26,12 +26,6 @@ else
             wget -P plugins/ "$ASSET_URL"
         done
     done
-
-    echo "pwd: $(pwd)"
-    echo "pwd files list:"
-    ls -l
-    echo "plugins files list:"
-    ls -la plugins
 
     wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
     chmod +x vib
