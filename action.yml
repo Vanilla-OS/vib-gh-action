@@ -22,7 +22,6 @@ runs:
     - name: Setup Vib
       shell: bash
       run: |
-        echo "${{ inputs.plugins }}" >> $INPUT_PLUGINS
         bash ${{ github.action_path }}/setup.sh
 
     - name: Run Vib

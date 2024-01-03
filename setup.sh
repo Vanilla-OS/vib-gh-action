@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VIB_VERSION="v0.3.1"
-PLUGINS_ARG="${INPUT_PLUGINS:-}"
+PLUGINS_ARG="${inputs.plugin:-}"
 
 if [ -z "$PLUGINS_ARG" ]; then
     echo "No plugins specified, using static Vib binary"
