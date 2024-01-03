@@ -8,5 +8,5 @@ See [action.yml](action.yml)
 steps:
   - uses: actions/checkout@v4
   - name: Vib Action
-    uses: vanilla-os/vib-gh@v0.3.1
+    uses: vanilla-os/vib-gh-action@v0.3.1
 ```
