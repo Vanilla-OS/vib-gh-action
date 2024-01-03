@@ -17,8 +17,14 @@ else
         REPO=$(echo "$PLUGIN" | awk -F':' '{print $1}')
         TAG=$(echo "$PLUGIN" | awk -F':' '{print $2}')
         
-        echo "Downloading $REPO"
-        wget -O "plugins/$(basename "$REPO").so" "https://github.com/$REPO/releases/download/$TAG/$(basename "$REPO").so"
+        echo "Downloading assets for $REPO"
+        
+        ASSETS_URL="https://api.github.com/repos/$REPO/releases/tags/$TAG"
+        ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
+
+        for ASSET_URL in $ASSET_URLS; do
+            wget -P plugins/ "$ASSET_URL"
+        done
     done
 
     wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
