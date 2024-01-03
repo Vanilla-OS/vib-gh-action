@@ -1,0 +1,16 @@
+name: 'Vib Action'
+description: 'Build Vib Image'
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Vib
+      run: |
+        wget https://github.com/Vanilla-OS/Vib/releases/download/v0.3.1/vib
+        chmod +x vib
+
+    - name: Run Vib
+      run: |
+        ./vib build recipe.yml
