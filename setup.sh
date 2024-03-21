@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VIB_VERSION="0.3.3"
+VIB_VERSION="0.5.0"
 PLUGINS_ARG="${1:-}"
 
 if [ -z "$PLUGINS_ARG" ]; then
