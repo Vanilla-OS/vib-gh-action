@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VIB_VERSION="0.6.2"
+VIB_VERSION="0.7.0"
 PLUGINS_ARG="${1:-}"
 
 if [ -z "$PLUGINS_ARG" ]; then
@@ -12,7 +12,7 @@ else
 
     mkdir plugins
 
-    IFS=',' read -ra PLUGIN_LIST <<< "$(echo "$PLUGINS_ARG")"
+    IFS=',' read -ra PLUGIN_LIST <<< "$PLUGINS_ARG"
     for PLUGIN in "${PLUGIN_LIST[@]}"; do
         REPO=$(echo "$PLUGIN" | awk -F':' '{print $1}')
         TAG=$(echo "$PLUGIN" | awk -F':' '{print $2}')
