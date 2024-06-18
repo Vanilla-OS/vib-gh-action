@@ -1,0 +1,5 @@
+/build
+/plugins
+vib
+*.tar.xz
+*.1

@@ -3,14 +3,14 @@
 VIB_VERSION="0.7.1"
 PLUGINS_ARG="${1:-}"
 
+wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/plugins.tar.xz"
+tar -xf plugins.tar.xz
+mv build/plugins plugins
+
 if [ -z "$PLUGINS_ARG" ]; then
     echo "No plugins specified, using static Vib binary"
-    wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
-    chmod +x vib
 else
     echo "Plugins specified, downloading plugin assets..."
-
-    mkdir plugins
 
     IFS=',' read -ra PLUGIN_LIST <<< "$PLUGINS_ARG"
     for PLUGIN in "${PLUGIN_LIST[@]}"; do
@@ -26,7 +26,7 @@ else
             wget -P plugins/ "$ASSET_URL"
         done
     done
-
-    wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
-    chmod +x vib
 fi
+
+wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
+chmod +x vib
