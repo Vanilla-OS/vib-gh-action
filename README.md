@@ -9,7 +9,7 @@ See [action.yml](action.yml)
 ```yml
 steps:
   - uses: actions/checkout@v4
-  - uses: vanilla-os/vib-gh-action@v0.7.2
+  - uses: vanilla-os/vib-gh-action@v0.7.3
     with:
       recipe: 'myRecipe.yml'
       plugins: org/repo:tag,org/repo:tag
