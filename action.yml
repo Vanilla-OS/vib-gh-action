@@ -16,13 +16,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
     - name: Setup Vib
       shell: bash
-      run: |
-        bash ${{ github.action_path }}/setup.sh ${{ inputs.plugins }}
+      run: $GITHUB_ACTION_PATH/setup.sh ${{ inputs.plugins }}
 
     - name: Run Vib
       shell: bash
