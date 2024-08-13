@@ -18,7 +18,8 @@ runs:
   steps:
     - name: Setup Vib
       shell: bash
-      run: $GITHUB_ACTION_PATH/setup.sh ${{ inputs.plugins }}
+      run: |
+        bash $GITHUB_ACTION_PATH/setup.sh ${{ inputs.plugins }}
 
     - name: Run Vib
       shell: bash
