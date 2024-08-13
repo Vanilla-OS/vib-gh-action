@@ -16,6 +16,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Checkout code
+      uses: action/checkout@v4
+
     - name: Setup Vib
       shell: bash
       run: |
