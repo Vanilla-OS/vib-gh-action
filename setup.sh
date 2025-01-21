@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VIB_VERSION="0.8.1"
+VIB_VERSION="1.0.0"
 PLUGINS_ARG="${1:-}"
 
 wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/plugins.tar.xz"
