@@ -1,32 +1,47 @@
 #!/bin/bash
 
-VIB_VERSION="1.0.0"
+VIB_VERSION="1.0.1"
 PLUGINS_ARG="${1:-}"
 
-wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/plugins.tar.xz"
-tar -xf plugins.tar.xz
+case "$RUNNER_ARCH" in
+    X64)    ARCH="amd64" ;;
+    ARM64)  ARCH="arm64" ;;
+    *)      echo "Unsupported runner architecture: $RUNNER_ARCH"; exit 1 ;;
+esac
+
+echo "Detected architecture: $ARCH"
+
+wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/plugins-$ARCH.tar.xz"
+tar -xf plugins-$ARCH.tar.xz
 mv build/plugins plugins
 
 if [ -z "$PLUGINS_ARG" ]; then
-	echo "No plugins specified, using static Vib binary"
+    echo "No plugins specified, using static Vib binary"
 else
-	echo "Plugins specified, downloading plugin assets..."
+    echo "Plugins specified, downloading plugin assets..."
 
-	IFS=',' read -ra PLUGIN_LIST <<<"$PLUGINS_ARG"
-	for PLUGIN in "${PLUGIN_LIST[@]}"; do
-		REPO=$(echo "$PLUGIN" | awk -F':' '{print $1}')
-		TAG=$(echo "$PLUGIN" | awk -F':' '{print $2}')
+    IFS=',' read -ra PLUGIN_LIST <<<"$PLUGINS_ARG"
+    for PLUGIN in "${PLUGIN_LIST[@]}"; do
+        REPO=$(echo "$PLUGIN" | awk -F':' '{print $1}')
+        TAG=$(echo "$PLUGIN" | awk -F':' '{print $2}')
 
-		echo "Downloading assets for $REPO..."
+        echo "Downloading assets for $REPO..."
 
-		ASSETS_URL="https://api.github.com/repos/$REPO/releases/tags/$TAG"
-		ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
+        ASSETS_URL="https://api.github.com/repos/$REPO/releases/tags/$TAG"
+        if [[ "$ARCH" == "arm64" ]]; then
+            ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+arm64[^"]*\.so')
+            if [ -z "$ASSET_URLS" ]; then
+                ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
+            fi
+        else
+            ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
+        fi
 
-		for ASSET_URL in $ASSET_URLS; do
-			wget -P plugins/ "$ASSET_URL"
-		done
-	done
+        for ASSET_URL in $ASSET_URLS; do
+            wget -P plugins/ "$ASSET_URL"
+        done
+    done
 fi
 
-wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib"
+wget -O vib "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/vib-$ARCH"
 chmod +x vib
