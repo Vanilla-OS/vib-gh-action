@@ -28,16 +28,9 @@ else
         echo "Downloading assets for $REPO..."
 
         ASSETS_URL="https://api.github.com/repos/$REPO/releases/tags/$TAG"
-        if [[ "$ARCH" == "arm64" ]]; then
-            ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+arm64[^"]*\.so')
-            if [ -z "$ASSET_URLS" ]; then
-                ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
-            fi
-		else
-			ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E "https://github.com/[^"]+$ARCH[^"]*\.so")
-			if [ -z "$ASSET_URLS" ]; then
-			ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
-			fi
+        ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E "https://github.com/[^\"]+$ARCH[^\"]*\.so")
+        if [ -z "$ASSET_URLS" ]; then
+            ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
         fi
 
         for ASSET_URL in $ASSET_URLS; do
