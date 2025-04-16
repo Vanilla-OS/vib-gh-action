@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VIB_VERSION="1.0.1"
+VIB_VERSION="1.0.2"
 PLUGINS_ARG="${1:-}"
 
 case "$RUNNER_ARCH" in
@@ -11,8 +11,8 @@ esac
 
 echo "Detected architecture: $ARCH"
 
-wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/plugins-$ARCH.tar.xz"
-tar -xf plugins-$ARCH.tar.xz
+wget "https://github.com/Vanilla-OS/Vib/releases/download/v$VIB_VERSION/plugins-$ARCH.tar.gz"
+tar -xf plugins-$ARCH.tar.gz
 mv build/plugins plugins
 
 if [ -z "$PLUGINS_ARG" ]; then
