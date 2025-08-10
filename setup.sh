@@ -28,13 +28,18 @@ else
         echo "Downloading assets for $REPO..."
 
         ASSETS_URL="https://api.github.com/repos/$REPO/releases/tags/$TAG"
-        ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E "https://github.com/[^\"]+$ARCH[^\"]*\.so")
+        ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E "https://github.com/[^\"]+-$ARCH\.so")
         if [ -z "$ASSET_URLS" ]; then
             ASSET_URLS=$(curl -s "$ASSETS_URL" | grep -o -E 'https://github.com/[^"]+\.so')
         fi
 
         for ASSET_URL in $ASSET_URLS; do
             wget -P plugins/ "$ASSET_URL"
+        done
+
+        for DOWNLOADED_ASSET in "plugins/*-$ARCH.so"; do
+            PLUGIN_NAME=$(basename "$DOWNLOADED_ASSET" "-$ARCH.so")
+            mv "$DOWNLOADED_ASSET" "plugins/$PLUGIN_NAME.so"
         done
     done
 fi
