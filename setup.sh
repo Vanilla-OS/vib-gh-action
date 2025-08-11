@@ -37,7 +37,7 @@ else
             wget -P plugins/ "$ASSET_URL"
         done
 
-        for DOWNLOADED_ASSET in "plugins/*-$ARCH.so"; do
+        for DOWNLOADED_ASSET in plugins/*-$ARCH.so; do
             PLUGIN_NAME=$(basename "$DOWNLOADED_ASSET" "-$ARCH.so")
             mv "$DOWNLOADED_ASSET" "plugins/$PLUGIN_NAME.so"
         done
