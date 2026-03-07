@@ -13,6 +13,11 @@ inputs:
     description: 'List of plugins to use'
     required: false
     default: ''
+  containerfile:
+    description: 'Path to Containerfile'
+    required: false
+    default: 'Containerfile'
+
 runs:
   using: 'composite'
   steps:
@@ -23,4 +28,4 @@ runs:
 
     - name: Run Vib
       shell: bash
-      run: ./vib build ${{ inputs.recipe }}
+      run: ./vib build --output ${{ inputs.containerfile }} ${{ inputs.recipe }}
