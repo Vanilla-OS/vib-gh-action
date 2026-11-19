@@ -9,7 +9,7 @@ See [action.yml](action.yml)
 ```yml
 steps:
   - uses: actions/checkout@v4
-  - uses: vanilla-os/vib-gh-action@v1.1.0
+  - uses: vanilla-os/vib-action@v1.1.0
     with:
       recipe: 'myRecipe.yml'
       plugins: org/repo:tag,org/repo:tag
@@ -17,6 +17,8 @@ steps:
 
 > [!NOTE]
 > The default `recipe` value is `recipe.yml`, default `plugins` value is empty.
+> 
+> The source code for this action has been moved to [Vanilla-OS/vib-action](https://github.com/vanilla-os/vib-action). This repository now functions only as a wrapper around it.
 
 ## References
 

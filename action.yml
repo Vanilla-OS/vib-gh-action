@@ -21,11 +21,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Setup Vib
-      shell: bash
-      run: |
-        bash $GITHUB_ACTION_PATH/setup.sh ${{ inputs.plugins }}
-
-    - name: Run Vib
-      shell: bash
-      run: ./vib build --output ${{ inputs.output }} ${{ inputs.recipe }}
+    - name: Run vib-action
+      uses: vanilla-os/vib-action@1.1.0
